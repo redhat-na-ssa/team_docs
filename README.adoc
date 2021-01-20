@@ -1,0 +1,7 @@
+== Git Project Governance
+
+. Keep deliverables as generic as possible.
++
+Avoid the use of customer and/or partner names.
+
+.  Package names for Java related projects should begin with: `com.redhat.naps.da.*`
