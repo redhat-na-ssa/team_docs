@@ -8,11 +8,22 @@
 
 == Purpose
 
+The purpose of this guide is to document a checklist of technologies and best practices for the creation of reproducible demos that showcase the Red Hat Application Services portfolio.
+
+These demos should speak to typical line-of-business scenario and should be easily provisioned by other Red Hat solution architects and/or partner system integrators.
+
+The target audience of this guide are demo developers.
+
 == Base Technologies
 
 === Local Dev Environment
 
+As a demo author, you'll need an appropriate local dev environment.
+
 ==== Hardware Resources
+
+Modern demos are written using a microservice architecture.
+The aggregate amount of hardware to support development of these microservice architected demos tends to be larger than legacy monolith architectures.
 
 .. RAM:   32GBs
 .. CPU:   8 threads
@@ -23,8 +34,8 @@
 +
 Your local dev environment needs to run a recent version of one of the following operating systems: 
 
-.. *RHEL* (prefered)
-.. *Fedora* (prefered)
+.. *RHEL* (preferred)
+.. *Fedora* (preferred)
 .. *OSX*
 
 . git
@@ -36,10 +47,29 @@ You'll need working experience creating java projects that reference the Red Hat
 
 .. IDE:  VSCode ( enabled with the link:https://marketplace.visualstudio.com/items?itemName=redhat.java[Language Support for Java extension] by Red Hat ) is recommended.
 
-
 . *podman*
 . *buildah*
 . *docker-compose*
++
+Locally demo development can be greatly facilitated by managing supporting database, messaging and security infrastructure via a _docker-compose_ file.
++
+The _docker-compose_ utility can be run on Fedora / RHEL as a facade to underlying podman functionality as per this link:https://fedoramagazine.org/use-docker-compose-with-podman-to-orchestrate-containers-on-fedora/[tutorial].
+
+. *oc utility*
++
+All versions of this utility are available at either of the following:
+
+.. https://access.redhat.com/downloads/content/290
++
+RHN subscription required
+
+.. https://mirror.openshift.com/pub/openshift-v4/clients/ocp/?C=M;O=D
++
+Accessible without a RHN subscription
+
+. *ansible*
++
+ie: dnf install ansible
 
 === Team Repositories
 ==== Source Code Version Control
@@ -64,9 +94,11 @@ link:https://quay.io/organization/redhat_naps_da[Red Hat NAPS DA Quay Organizati
 
 === Quarkus
 
-=== Ansible
-
 === OpenShift
+
+==== OpenShift Lifecycle Manager
+
+=== Ansible
 
 === Asciidoc / Markdown
 
