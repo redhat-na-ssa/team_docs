@@ -1,0 +1,82 @@
+:scrollbar:
+:data-uri:
+:toc2:
+:linkattrs:
+
+= SSDA App Services Demo Creation Checklist
+:numbered:
+
+== Purpose
+
+== Base Technologies
+
+=== Local Dev Environment
+
+==== Hardware Resources
+
+.. RAM:   32GBs
+.. CPU:   8 threads
+
+==== Tooling
+
+. Operating System
++
+Your local dev environment needs to run a recent version of one of the following operating systems: 
+
+.. *RHEL* (prefered)
+.. *Fedora* (prefered)
+.. *OSX*
+
+. git
+. Java
+.. Ensure your local dev environment is enabled with OpenJDK 11 (or more recent)
+.. maven
++
+You'll need working experience creating java projects that reference the Red Hat GA supported libraries at link:https://maven.repository.redhat.com/ga/[maven.repository.redhat.com]
+
+.. IDE:  VSCode ( enabled with the link:https://marketplace.visualstudio.com/items?itemName=redhat.java[Language Support for Java extension] by Red Hat ) is recommended.
+
+
+. *podman*
+. *buildah*
+. *docker-compose*
+
+=== Team Repositories
+==== Source Code Version Control
+
+link:https://github.com/redhat-naps-da[Red Hat Government Strategic Solutions Github Organization]
+
+==== Quay
+
+link:https://quay.io/organization/redhat_naps_da[Red Hat NAPS DA Quay Organization]
+
+=== Red Hat Single Sign-On
+
+==== SSO Client(s)
+
+==== Users
+
+==== User Attributes
+
+==== Roles
+
+==== Import Realm JSON
+
+=== Quarkus
+
+=== Ansible
+
+=== OpenShift
+
+=== Asciidoc / Markdown
+
+
+== Advanced
+
+=== Ansible Operator SDK
+. link:https://sdk.operatorframework.io/docs/building-operators/ansible/tutorial/[Ansible Operator SDK]
+
+=== Agnosticd
+. link:https://github.com/redhat-cop/agnosticd[Agnosticd]
+
+== Examples
