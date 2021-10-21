@@ -8,17 +8,18 @@
 
 == Purpose
 
-The purpose of this guide is to document a checklist of technologies and best practices for the creation of reproducible demos that showcase the Red Hat Application Services portfolio.
+The purpose of this guide is to provide a checklist of technologies and best practices for the creation of reproducible demos that showcase the Red Hat Application Services portfolio.
 
-These demos should speak to typical line-of-business scenario and should be easily provisioned by other Red Hat solution architects and/or partner system integrators.
+These demos should highlight the use of Red Hat Application Services technologies to implement a typical line-of-business scenario. 
+They should be easily provisioned by other Red Hat solution architects or partner system integrators.
 
-The target audience of this guide is demo developers (either partner SIs or Red Hat associates).
+The target audience of this guide are developers tasked with contributing to these demos.
 
 == Base Technologies
 
 === Local Dev Environment
 
-As a demo author, you'll need an appropriate local dev environment.
+As a contributor to a demo, you'll need an appropriate local dev environment.
 
 ==== Hardware Resources
 
@@ -71,10 +72,9 @@ Accessible without a RHN subscription
 +
 ie: dnf install ansible
 
-=== Team Repositories
+=== Repositories
 
 . Source Code:  link:https://github.com/redhat-naps-da[Red Hat Government Strategic Solutions Github Organization]
-
 
 . Container images: link:https://quay.io/organization/redhat_naps_da[Red Hat NAPS DA Quay Organization]
 
@@ -106,7 +106,7 @@ You'll want to think through the users and roles needed to facilitate the busine
 You'll want to think through the user attributes that should be included in the access token of an authenticated user.  These attributes for each user should also be included in the JSON representation of your SSO Realm.
 
 === Quarkus
-Default programming language for all services should be Quarkus.
+The default programming language for all services of a demo should be Quarkus.
 
 From a deployment and runtime perspective, the following Quarkus Plugins are highly recommended:
 
@@ -148,14 +148,31 @@ ie:  details and screenshots illustrating how to run the demo for a customer
 +
 List of possible discussion vectors with a customer that the demo could inspire  
 
+=== Web Apps
+
+A demo tailored toward a line of business audience will need one or more user interfaces.
+
+These user interfaces should be written in either Angular or ReactJS.
+
+The use of Patternfly is recommended.
+
+These user interfaces should be reactive via either websockets or Server Sent Events (SSE).
+
 
 == Advanced
 
 === Ansible Operator SDK
-. link:https://sdk.operatorframework.io/docs/building-operators/ansible/tutorial/[Ansible Operator SDK]
+
+To facilitate the availability of your demo, the link:https://sdk.operatorframework.io/docs/building-operators/ansible/tutorial/[Ansible Operator SDK] can be used to create an Operator from the demo ansible you've already created.
 
 === Agnosticd
-. link:https://github.com/redhat-cop/agnosticd[Agnosticd]
+
+It might make sense to make your demo available to Red Hatters and partners via RHPDS.
+
+
+This can be done by creating an ansible role in link:https://github.com/redhat-cop/agnosticd[Agnosticd].
+
+When an end-user orders your demo from RHPDS, this agnosticd ansible role can pull your operator and install it (and subsequently your demo) on an OpenShift cluster.
 
 == Examples
 
