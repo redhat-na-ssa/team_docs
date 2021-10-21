@@ -3,23 +3,41 @@
 :toc2:
 :linkattrs:
 
-= SSDA App Services Demo Creation Checklist
+= SSDA App Services Demo Base Checklist
 :numbered:
 
 == Purpose
 
-The purpose of this guide is to provide a checklist of technologies and best practices for the creation of reproducible demos that showcase the Red Hat Application Services portfolio.
+The purpose of this guide is to provide a checklist of base technologies and best practices for the creation of reproducible demos that showcase the Red Hat Application Services portfolio.
 
 These demos should highlight the use of Red Hat Application Services technologies to implement a typical line-of-business scenario. 
-They should be easily provisioned by other Red Hat solution architects or partner system integrators.
+These demos  should be easy to provision by other Red Hat solution architects or partner system integrators.
 
-The target audience of this guide are developers tasked with contributing to these demos.
+The target audience of this guide is developers tasked with contributing to these demos.
+
+The base technologies and best practices listed in this document are common to all demos targeting a line-of-business audience.
+
+In addition to the base technologies listed in this document, there almost certainly will be need for technologies from one or more of Red Hat's three Application Services bundles:
+
+. *Runtimes*
++
+Data Grid, Serverless, Service Mesh, Code Ready Workspaces
+
+. *Integration*
++
+AMQ Streams, Debezium, AMQ Broker, 3scale, Fuse, Camel-K, Fuse Online, Service Registry
+
+. *Business Automation*
++
+RH-PAM, RH-DM, Business Optaplanner, Kogito, Dashbuilder
+
+In addition to these Application Services technologies, it may be desirable to include ops monitoring capabilities in your demo. ie:  Prometheus, Grafana, Kabana.
 
 == Base Technologies
 
 === Local Dev Environment
 
-As a contributor to a demo, you'll need an appropriate local dev environment.
+In order to facilitate a rapid development & testing cycle, you'll need an appropriate local dev environment.
 
 ==== Hardware Resources
 
@@ -90,7 +108,6 @@ In particular, the following is a checklist of RH-SSO capabilities that are ofte
 +
 An entire SSO realm should be version controlled in git and loaded into RH-SSO during provisioning of the demo.  During an un-install, that SSO Realm should be deleted from RH-SSO.
 
-
 . *SSO Client(s)*
 +
 At least one SSO Client will need to be created and most likely enabled for OIDC's _Authorization Code Flow_ (to issue JWT access tokens).
@@ -115,12 +132,33 @@ From a deployment and runtime perspective, the following Quarkus Plugins are hig
 
 Related, at deployment time, add a custom application.properties to a configmap and bind to the following directory of the pod:  /deployments/config/application.properties
 
+=== RDBMS
+
+PostgreSQL tends to be the default RDBMS that serves many of Red Hat's Application Services technologies. ie:  RH-SSO, Kogito, Fuse Online, etc.
+
+As such, it is recommended that where there is additional need for a RDBMS to support your demo, PostgreSQL be used.
+
+During the presentation of the demo, if/when asked about production considerations of an RDBMS, remind the audience that Red Hat is not a database company and elaborate on the many production options available on the market.
+
 === OpenShift
 
 Default target platform for all business focused demos is OpenShift.
 
 It's likely that your demo should be deployed to the Valkyrie cluster.
 It's possible that your demo should also be made available via RHPDS.
+
+Ensure that all Deployments or Deployment Configs define a limits and requests as well as health checks.
+
+Assume that your demo could be deployed into an OpenShift environment where the Openshift administrator has imposed a Quota and LimitRange on your demo.
+As part of the demo source control, you may want to include sample Quota and LimitRange configs that demonstrate what your demo has been tested with.
+
+Do not assume that the routes exposed by the target OpenShift cluster that your demo will ultimately be deployed to are secured using a certificate signed by a known Certificate Authority (ie:  Lets Encrypt)
+
+=== Storage
+
+For the purpose of your demo targetting a line-of-business audience, keep storage requirements simple.
+
+Stick to the use of RWO persistent volumes.
 
 ==== Operator Lifecycle Manager
 
@@ -154,10 +192,9 @@ A demo tailored toward a line of business audience will need one or more user in
 
 These user interfaces should be written in either Angular or ReactJS.
 
-The use of Patternfly is recommended.
+The use of Patternfly is also recommended.
 
-These user interfaces should be reactive via either websockets or Server Sent Events (SSE).
-
+These user interfaces should be reactive n the sense that they consume events via either websockets or Server Sent Events (SSE).
 
 == Advanced
 
