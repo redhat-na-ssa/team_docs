@@ -10,10 +10,10 @@
 
 The purpose of this guide is to provide a checklist of base technologies and best practices for the creation of reproducible demos that showcase the Red Hat Application Services portfolio.
 
-These demos should highlight the use of Red Hat Application Services technologies to implement a typical line-of-business scenario. 
+These demos should highlight the use of Red Hat Application Services technologies to implement a typical line-of-business (LoB) scenario. 
 These demos  should be easy to provision by other Red Hat solution architects or partner system integrators.
 
-The target audience of this guide is developers tasked with contributing to these demos.
+The target audience of this guide is developers tasked with contributing to these LoB demos.
 
 The base technologies and best practices listed in this document are common to all demos targeting a line-of-business audience.
 
@@ -21,7 +21,7 @@ In addition to the base technologies listed in this document, there almost certa
 
 . *Runtimes*
 +
-Data Grid, Serverless, Service Mesh, Code Ready Workspaces
+Data Grid, Serverless, Service Mesh, Code Ready Workspaces, Tekton/Jenkins
 
 . *Integration*
 +
@@ -98,11 +98,12 @@ ie: dnf install ansible
 
 === Red Hat Single Sign-On
 
-Every business focused demo should make use of the OpenID Connect protocol.
+The vast majority of demos targeting a line-of-business audience will speak to different personas with different roles and user attributes.
+As such, your demo should make use of the OpenID Connect protocol.
 
 You should be well-versed in the use of Red Hat SSO as the OpenID Connect _Identity Provider_ for your demo.
 
-In particular, the following is a checklist of RH-SSO capabilities that are often utilized in business focused demos:
+In particular, the following is a checklist of RH-SSO capabilities that are often utilized to facilitate demos:
 
 . *SSO Realm*
 +
@@ -123,14 +124,21 @@ You'll want to think through the users and roles needed to facilitate the busine
 You'll want to think through the user attributes that should be included in the access token of an authenticated user.  These attributes for each user should also be included in the JSON representation of your SSO Realm.
 
 === Quarkus
+
 The default programming language for all services of a demo should be Quarkus.
 
-From a deployment and runtime perspective, the following Quarkus Plugins are highly recommended:
+The use of the SmallRye Mutiny reactive libraries is highly recommended.
+
+RESTful APIs should include OpenAPI documentation by default by including the following quarkus dependency:  io.quarkus:quarkus-smallrye-openapi
+
+To facilitate deployment and health-check needs, the following Quarkus plugins are highly recommended:
 
 . *quarkus-container-image-docker*
 . *quarkus-smallrye-health*
 
-Related, at deployment time, add a custom application.properties to a configmap and bind to the following directory of the pod:  /deployments/config/application.properties
+Related, at deployment time, add a custom application.properties to a configmap and bind to the following directory of the pod:  /deployments/config/application.properties.
+
+Compilation to a native binary (ie: Mandrel) is a capability that can be discussed (if/when appropriate) during a presentation but is not typically needed for the LoB targetted demo itself.
 
 === RDBMS
 
@@ -138,7 +146,7 @@ PostgreSQL tends to be the default RDBMS that serves many of Red Hat's Applicati
 
 As such, it is recommended that where there is additional need for a RDBMS to support your demo, PostgreSQL be used.
 
-During the presentation of the demo, if/when asked about production considerations of an RDBMS, remind the audience that Red Hat is not a database company and elaborate on the many production options available on the market.
+During the presentation, if/when asked about production considerations of an RDBMS, remind the audience that Red Hat is not a database company and elaborate on the many production options available on the market.
 
 === OpenShift
 
