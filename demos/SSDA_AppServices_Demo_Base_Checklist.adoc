@@ -158,7 +158,7 @@ It's possible that your demo should also be made available via RHPDS.
 Ensure that all Deployments or Deployment Configs define a limits and requests as well as health checks.
 
 Assume that your demo could be deployed into an OpenShift environment where the Openshift administrator has imposed a Quota and LimitRange on your demo.
-As part of the demo source control, you may want to include sample Quota and LimitRange configs that demonstrate what your demo has been tested with.
+As part of the demo source control, it is recommended that a sample Quota and LimitRange configs be included.
 
 Do not assume that the routes exposed by the target OpenShift cluster that your demo will ultimately be deployed to are secured using a certificate signed by a known Certificate Authority (ie:  Lets Encrypt)
 
@@ -203,6 +203,9 @@ These user interfaces should be written in either Angular or ReactJS.
 The use of Patternfly is also recommended.
 
 These user interfaces should be reactive n the sense that they consume events via either websockets or Server Sent Events (SSE).
+
+Note that the HA-Proxy router of OpenShift kills persistent TCP connection (ie:  SSE, Websockets, etc) every 30 seconds (by default).
+Make sure that the SSE or websocket clients in your UI can gracefully recover.
 
 == Out of Scope
 
