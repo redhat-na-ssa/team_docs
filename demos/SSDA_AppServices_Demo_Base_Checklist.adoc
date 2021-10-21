@@ -204,6 +204,22 @@ The use of Patternfly is also recommended.
 
 These user interfaces should be reactive n the sense that they consume events via either websockets or Server Sent Events (SSE).
 
+== Out of Scope
+
+. *Email*
++
+Emails are often a nice addition to line-of-business related demos.  
+Unfortunately, there is not a zero-cost smtp service that can be leveraged reliably in a hands-off automated manner.
++
+When SMTP is needed, _free-tier_ services such as SocketLabs and SendGrid can be leveraged on a case by case basis by the SA responsible for delivering the demo to their customer.
++
+If/when a SMTP service is needed, the demo documentation should provide guidence on the integration touchpoints.
+
+. *CI/CD*
++
+CI/CD is certainly important for the evolution of any software solution.
+However, for the purpose of a demo targetting a line-of-business audience, its typically sufficient to simply discuss CI/CD considerations as part of a presentation.
+
 == Advanced
 
 === Ansible Operator SDK
