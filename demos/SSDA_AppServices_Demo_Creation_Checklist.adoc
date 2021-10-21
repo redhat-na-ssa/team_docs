@@ -12,7 +12,7 @@ The purpose of this guide is to document a checklist of technologies and best pr
 
 These demos should speak to typical line-of-business scenario and should be easily provisioned by other Red Hat solution architects and/or partner system integrators.
 
-The target audience of this guide are demo developers.
+The target audience of this guide is demo developers (either partner SIs or Red Hat associates).
 
 == Base Technologies
 
@@ -30,16 +30,16 @@ The aggregate amount of hardware to support development of these microservice ar
 
 ==== Tooling
 
-. Operating System
+. *Operating System*
 +
 Your local dev environment needs to run a recent version of one of the following operating systems: 
 
-.. *RHEL* (preferred)
-.. *Fedora* (preferred)
-.. *OSX*
+.. RHEL (preferred)
+.. Fedora (preferred)
+.. OSX
 
-. git
-. Java
+. *git*
+. *Java*
 .. Ensure your local dev environment is enabled with OpenJDK 11 (or more recent)
 .. maven
 +
@@ -72,35 +72,81 @@ Accessible without a RHN subscription
 ie: dnf install ansible
 
 === Team Repositories
-==== Source Code Version Control
 
-link:https://github.com/redhat-naps-da[Red Hat Government Strategic Solutions Github Organization]
+. Source Code:  link:https://github.com/redhat-naps-da[Red Hat Government Strategic Solutions Github Organization]
 
-==== Quay
 
-link:https://quay.io/organization/redhat_naps_da[Red Hat NAPS DA Quay Organization]
+. Container images: link:https://quay.io/organization/redhat_naps_da[Red Hat NAPS DA Quay Organization]
 
 === Red Hat Single Sign-On
 
-==== SSO Client(s)
+Every business focused demo should make use of the OpenID Connect protocol.
 
-==== Users
+You should be well-versed in the use of Red Hat SSO as the OpenID Connect _Identity Provider_ for your demo.
 
-==== User Attributes
+In particular, the following is a checklist of RH-SSO capabilities that are often utilized in business focused demos:
 
-==== Roles
+. *SSO Realm*
++
+An entire SSO realm should be version controlled in git and loaded into RH-SSO during provisioning of the demo.  During an un-install, that SSO Realm should be deleted from RH-SSO.
 
-==== Import Realm JSON
+
+. *SSO Client(s)*
++
+At least one SSO Client will need to be created and most likely enabled for OIDC's _Authorization Code Flow_ (to issue JWT access tokens).
++
+The client should also be properly configured with client re-directs and CORS.
+
+. *Users & Roles*
++
+You'll want to think through the users and roles needed to facilitate the business scenario of your demo.  These users and roles should be included in the JSON representation of your SSO Realm.  
+
+. *User Attributes*
++
+You'll want to think through the user attributes that should be included in the access token of an authenticated user.  These attributes for each user should also be included in the JSON representation of your SSO Realm.
 
 === Quarkus
+Default programming language for all services should be Quarkus.
+
+From a deployment and runtime perspective, the following Quarkus Plugins are highly recommended:
+
+. *quarkus-container-image-docker*
+. *quarkus-smallrye-health*
+
+Related, at deployment time, add a custom application.properties to a configmap and bind to the following directory of the pod:  /deployments/config/application.properties
 
 === OpenShift
 
-==== OpenShift Lifecycle Manager
+Default target platform for all business focused demos is OpenShift.
+
+It's likely that your demo should be deployed to the Valkyrie cluster.
+It's possible that your demo should also be made available via RHPDS.
+
+==== Operator Lifecycle Manager
+
+Provisioning of infrastructure related coomponents such AMQ Streams, RH-SSO, Serverless, etc should be via the Operator Lifecycle Manager (OLM).
 
 === Ansible
 
+An ansible playbook should be authored to deploy your complete application to OpenShift in a repeatable manner.
+
+
 === Asciidoc / Markdown
+
+Write your documentation in either asciidoc or markdown and version control it as part of the demo's git project.
+
+Please include of table of contents.  Major sections of the documentation should include the following: 
+
+. Purpose
+. Provisioning instructions
+. Architecture diagram
+. Demo script
++
+ie:  details and screenshots illustrating how to run the demo for a customer
+
+. Technical discussion vectors
++
+List of possible discussion vectors with a customer that the demo could inspire  
 
 
 == Advanced
@@ -112,3 +158,6 @@ link:https://quay.io/organization/redhat_naps_da[Red Hat NAPS DA Quay Organizati
 . link:https://github.com/redhat-cop/agnosticd[Agnosticd]
 
 == Examples
+
+. link:https://github.com/redhat-naps-da/himss_interoperability_showcase_2021[HIMSS 2021 Demo]
+. link:https://www.erdemo.io/[ER-Demo]
