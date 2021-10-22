@@ -3,7 +3,7 @@
 :toc2:
 :linkattrs:
 
-= SSDA App Services Demo Base Checklist
+= SSDA App Services LoB Demo Base Checklist
 :numbered:
 
 == Purpose
